@@ -13,7 +13,7 @@ const SAMPLE_QUESTIONS: Question[] = [
    { id: 2, question: "Which company developed React?", options: ["Google", "Facebook", "Microsoft", "Twitter"], correctIndex: 1 },
    { id: 3, question: "What's the HTML tag for the largest heading?", options: ["<h1>", "<head>", "<title>", "<header>"], correctIndex: 0 },
    { id: 4, question: "Which operator is used for assignment in JavaScript?", options: ["==", "=", "===", "+="], correctIndex: 1 },
-  { id: 5, question: "React is a____ library?", options: ["JavaScript", "HTML", "CSS", "Tailwind"], correctIndex: 1 },
+  
   ]; 
 
 function App() {
