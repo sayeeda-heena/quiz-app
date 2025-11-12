@@ -26,6 +26,7 @@ function App() {
   const [timeLeft, setTimeLeft] = useState<number>(QUESTION_TIMER);
   const [isAnswerRevealed, setIsAnswerReleaved] = useState<boolean>(false);
   const [finished, setFinished] = useState<boolean>(false);
+  const [exited, setExited] = useState(false);
 
   useEffect(() => {
     if(finished || isAnswerRevealed) return;
@@ -70,14 +71,15 @@ function App() {
    }
 
    function handleExit() {
-    try{
-      window.close(); // attempt to close the tab
-    }catch {
-      // fallback in case window.close is blocked
-      window.location.href = "about:blank";
-    }
-
-   }
+   setExited(true);
+}
+if (exited) {
+  return (
+  <div className="flex flex-col items-center justify-center h-screen text-center">
+      <h2 className="text-2xl font-bold mb-4">Thanks for playing!</h2>
+    </div>
+  );
+}
 
    if (finished) {
     let message = "";
@@ -89,7 +91,7 @@ function App() {
       <div className='min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-50 to-white p-4'>
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-6 text-center">
         <h2 className='text-3xl font-bold mb-2'>Quiz Completed</h2>
-        <p text-lg text-gray-600 mb-2>Your score</p>
+        <p className='text-lg text-gray-600 mb-2'>Your score</p>
         <div className="flex items-baseline justify-center gap-3 mb-4">
         <span className="text-5xl font-extrabold text-indigo-600">{score}</span>
         <span className="text-lg text-gray-500">/ {QUESTIONS.length}</span>
@@ -124,7 +126,7 @@ function App() {
 <div className='grid gap-3'>
  {q.options.map((opt, i) => {
   const isSelected = selected === i;
-  const isCorrect = q.correctIndex === 1;
+  const isCorrect = q.correctIndex === i;
   const base = "p-3 rounded-lg border cursor-pointer transition-all";
   let style = "bg-white border-gray-200";
   if(isAnswerRevealed) {
@@ -153,8 +155,12 @@ Next
 </div>
 )}
 
+
+
   </div>
 </div>
+
+
 
    );
 
